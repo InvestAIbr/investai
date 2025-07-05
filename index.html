@@ -1,51 +1,52 @@
+
 <!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>InvestAI</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-white transition duration-300">
-    <div class="max-w-3xl mx-auto p-6">
-      <div class="flex justify-between items-center">
-        <h1 class="text-4xl font-bold">InvestAI</h1>
-        <button id="toggleTheme" class="bg-gray-300 dark:bg-gray-700 px-3 py-1 rounded">Modo Escuro</button>
-      </div>
-      <p class="mt-4 text-xl">Investimentos com inteligência, constância e propósito.</p>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>InvestAI</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>InvestAI</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Notícias</a>
+      <a href="#">Criptos</a>
+      <a href="#">Ações</a>
+      <a href="#">Diário</a>
+    </nav>
+    <button id="toggle-theme">🌙</button>
+  </header>
 
-      <div class="mt-8 space-y-6">
-        <section>
-          <h2 class="text-2xl font-semibold mb-2">📊 Aportes Mensais</h2>
-          <ul class="list-disc list-inside">
-            <li>R$ 600 - Bitcoin (BTC)</li>
-            <li>R$ 300 - Altcoins estratégicas</li>
-            <li>R$ 100 - Stablecoins (USDT)</li>
-          </ul>
-        </section>
+  <main>
+    <section class="bloco">
+      <h2>📊 Aportes Mensais</h2>
+      <ul>
+        <li>R$ 600 - Bitcoin (BTC)</li>
+        <li>R$ 300 - Altcoins estratégicas</li>
+        <li>R$ 100 - Stablecoins (USDT)</li>
+      </ul>
+    </section>
 
-        <section>
-          <h2 class="text-2xl font-semibold mb-2">📈 Cotações em tempo real</h2>
-          <p>(Integração futura com CoinGecko e B3)</p>
-        </section>
+    <section class="bloco">
+      <h2>📈 Cotações em Tempo Real</h2>
+      <div id="cotacoes">Carregando...</div>
+    </section>
 
-        <section>
-          <h2 class="text-2xl font-semibold mb-2">📖 Diário da Jornada</h2>
-          <p>Criado para registrar aprendizados, decisões e evolução mensal.</p>
-        </section>
+    <section class="bloco">
+      <h2>📘 Diário da Jornada</h2>
+      <textarea id="diario" rows="6" placeholder="Escreva aqui..."></textarea>
+      <button onclick="salvarEntrada()">Salvar</button>
+      <div id="historico"></div>
+    </section>
+  </main>
 
-        <section>
-          <h2 class="text-2xl font-semibold mb-2">🙏 Fé e Constância</h2>
-          <p>“Disciplina supera sorte. Constância constrói liberdade.”</p>
-        </section>
-      </div>
-    </div>
+  <footer>
+    <p>“Disciplina supera sorte. Constância constrói liberdade.”</p>
+  </footer>
 
-    <script>
-      const btn = document.getElementById('toggleTheme');
-      btn.onclick = () => {
-        document.body.classList.toggle('dark');
-      };
-    </script>
-  </body>
+  <script src="script.js"></script>
+</body>
 </html>
