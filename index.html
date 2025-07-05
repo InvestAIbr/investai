@@ -1,52 +1,28 @@
-
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>InvestAI</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style/style.css" />
 </head>
 <body>
   <header>
     <h1>InvestAI</h1>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#">Notícias</a>
-      <a href="#">Criptos</a>
-      <a href="#">Ações</a>
-      <a href="#">Diário</a>
-    </nav>
-    <button id="toggle-theme">🌙</button>
+    <p>Panorama do Dia – Inteligência, Constância e Propósito</p>
   </header>
-
   <main>
-    <section class="bloco">
-      <h2>📊 Aportes Mensais</h2>
-      <ul>
-        <li>R$ 600 - Bitcoin (BTC)</li>
-        <li>R$ 300 - Altcoins estratégicas</li>
-        <li>R$ 100 - Stablecoins (USDT)</li>
-      </ul>
+    <section id="market">
+      <h2>📊 Visão de Mercado</h2>
+      <p>Carregando dados de mercado...</p>
     </section>
-
-    <section class="bloco">
-      <h2>📈 Cotações em Tempo Real</h2>
-      <div id="cotacoes">Carregando...</div>
-    </section>
-
-    <section class="bloco">
-      <h2>📘 Diário da Jornada</h2>
-      <textarea id="diario" rows="6" placeholder="Escreva aqui..."></textarea>
-      <button onclick="salvarEntrada()">Salvar</button>
-      <div id="historico"></div>
+    <section id="news">
+      <h2>📰 Notícias Rápidas</h2>
+      <p>Carregando notícias...</p>
     </section>
   </main>
-
   <footer>
-    <p>“Disciplina supera sorte. Constância constrói liberdade.”</p>
+    <p>Disciplina supera sorte. Constância constrói liberdade.</p>
   </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>

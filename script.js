@@ -1,41 +1,45 @@
 
-document.addEventListener("DOMContentLoaded", () => {
-  const themeButton = document.getElementById("toggle-theme");
-  themeButton.onclick = () => {
-    document.body.classList.toggle("dark");
-  };
-
-  fetchCotacoes();
-  carregarEntradas();
-});
-
-function fetchCotacoes() {
-  const cotacoes = {
-    BTC: "R$ 349.000",
-    ETH: "R$ 18.000",
-    "S&P500": "5.500 pts"
-  };
-
-  const div = document.getElementById("cotacoes");
-  div.innerHTML = Object.entries(cotacoes)
-    .map(([k, v]) => `<strong>${k}</strong>: ${v}`)
-    .join("<br>");
+async function fetchPrices() {
+    try {
+        const [btc, eth] = await Promise.all([
+            fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=brl'),
+            fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=brl')
+        ]);
+        const btcData = await btc.json();
+        const ethData = await eth.json();
+        document.getElementById('btc-price').textContent = 'R$ ' + btcData.bitcoin.brl.toLocaleString();
+        document.getElementById('eth-price').textContent = 'R$ ' + ethData.ethereum.brl.toLocaleString();
+    } catch (error) {
+        console.error('Erro ao carregar cotações de cripto:', error);
+    }
 }
 
-function salvarEntrada() {
-  const texto = document.getElementById("diario").value;
-  const historico = JSON.parse(localStorage.getItem("diario")) || [];
-  historico.push({ data: new Date().toLocaleString(), texto });
-  localStorage.setItem("diario", JSON.stringify(historico));
-  document.getElementById("diario").value = "";
-  carregarEntradas();
+async function fetchUSD() {
+    try {
+        const usd = await fetch('https://economia.awesomeapi.com.br/last/USD-BRL');
+        const usdData = await usd.json();
+        document.getElementById('usdbrl-price').textContent = 'R$ ' + parseFloat(usdData.USDBRL.bid).toFixed(2);
+    } catch (error) {
+        console.error('Erro ao carregar cotação do dólar:', error);
+    }
 }
 
-function carregarEntradas() {
-  const historico = JSON.parse(localStorage.getItem("diario")) || [];
-  const div = document.getElementById("historico");
-  div.innerHTML = historico
-    .map((e) => `<p><em>${e.data}</em>: ${e.texto}</p>`)
-    .reverse()
-    .join("");
+async function fetchNews() {
+    try {
+        const response = await fetch('https://gnews.io/api/v4/top-headlines?lang=pt&token=PUT_YOUR_API_KEY_HERE');
+        const data = await response.json();
+        const newsList = document.getElementById('news-list');
+        newsList.innerHTML = "";
+        data.articles.slice(0, 5).forEach(article => {
+            const li = document.createElement('li');
+            li.innerHTML = '<strong>' + article.title + '</strong><br><a href="' + article.url + '" target="_blank">Leia mais</a>';
+            newsList.appendChild(li);
+        });
+    } catch (error) {
+        console.error('Erro ao carregar notícias:', error);
+    }
 }
+
+fetchPrices();
+fetchUSD();
+fetchNews();
